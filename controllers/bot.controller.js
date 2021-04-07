@@ -1,4 +1,6 @@
 const configs = global.configs;
+const crypto = require('crypto');
+const { execSync } = require('child_process');
 
 module.exports = {
 
@@ -10,7 +12,8 @@ module.exports = {
    * @param {*} next
    */
   getBotInfo: function (req, res, next) {
-    console.log(process.env)
+    const androidId = execSync('settings get secure android_id').toString().split('\n')[0];
+    const botId = crypto.createHash('sha256').update(androidId).digest('hex');
     return res.send({ status: 'OK', data: {} });
   }
 }

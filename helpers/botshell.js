@@ -25,7 +25,6 @@ botshell.once = function (msg, event, callback) {
     let response = null;
     socket.write(msg, function () {
       return socket.on(event, function (re) {
-        console.log(re.toString(), re.toString() == 'Connected to ohmni bot_shell.\n')
         if (re.toString() == 'Connected to ohmni bot_shell.\n') return;
         response = re;
         socket.end();

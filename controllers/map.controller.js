@@ -21,8 +21,8 @@ module.exports = {
     // socket.on('connect', function () {
     //   console.log('*** Botshell connected');
 
-    console.log(botshell)
-    botshell.write(`cmd_load_uv_plan ${mapId} ${location} path_location\n`);
+    console.log(global)
+    botshell.write(`cmd_load_uv_plan ${mapId} ${location} path_location`);
     return botshell.on('plan_loaded', function () {
       return res.send({ status: 'OK', data: { loaded: true } });
     });

@@ -1,4 +1,5 @@
-const botshell = global.botshell;
+// const botshell = global.botshell;
+const net = require('net');
 
 module.exports = {
 

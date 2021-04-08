@@ -16,7 +16,7 @@ module.exports = {
     return init(function (botshell) {
       botshell.write(`load_uv_plan ${mapId} ${location} path_location\r\n`);
       return botshell.on('data', function (re) {
-        console.log(re)
+        console.log(re.toString('utf8'))
         return res.send({ status: 'OK', data: { loaded: true } });
       });
     });

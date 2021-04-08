@@ -2,7 +2,7 @@ const net = require('net');
 
 const BOTSHELL_PATH = '/app/bot_shell.sock';
 
-
+const botshell = {}
 
 /**
  * Botshell client

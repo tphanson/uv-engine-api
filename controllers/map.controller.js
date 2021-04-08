@@ -1,3 +1,5 @@
+const botshell = global.botshell;
+
 module.exports = {
 
   /**
@@ -11,7 +13,10 @@ module.exports = {
     const { mapId, location } = req.query;
     if (!mapId || !location) return next('Invalid input');
 
-    return res.send({ status: 'OK', data: {} });
+    botshell.write(`cmd_load_uv_plan ${mapId} ${location} path_location\n`);
+    return botshell.on('plan_loaded', function () {
+      return res.send({ status: 'OK', data: { loaded: true } });
+    });
   },
 
   /**

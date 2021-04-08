@@ -13,7 +13,7 @@ module.exports = {
     const { mapId, location } = req.query;
     if (!mapId || !location) return next('Invalid input');
 
-    const msg = `load_uv_plan "${mapId}" "${location}" "path_location"\r\n`;
+    const msg = `load_uv_plan ${encodeURI(mapId)} ${encodeURI(location)} path_location\r\n`;
     console.log(msg)
     return once(msg, 'data', function (re) {
       console.log('return', re.toString('utf8'))

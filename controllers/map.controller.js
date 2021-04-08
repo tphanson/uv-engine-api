@@ -10,7 +10,7 @@ module.exports = {
    * @param {*} next
    */
   getMap: function (req, res, next) {
-    const { mapId, location } = req.query;
+    const { mapId, location } = req.query || require('/app/map.json');
     if (!mapId || !location) return next('Invalid input');
 
     const msg = `load_uv_plan ${encodeURI(mapId)} ${encodeURI(location)} path_location\r\n`;

@@ -20,12 +20,18 @@ botshell.init = function (callback) {
 /**
  * Write, listen and then close
  */
-botshell.once = function (msg, callback) {
+botshell.once = function (msg, event, callback) {
   return botshell.init(function (socket) {
+    let response = null;
     socket.write(msg, function () {
-      socket.end();
+      return socket.on(event, function (re) {
+        response = re;
+        socket.end();
+      });
     });
-    return socket.on('end', callback);
+    return socket.on('end', function () {
+      return callback(response);
+    });
   });
 }
 

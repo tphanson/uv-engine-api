@@ -14,8 +14,9 @@ module.exports = {
     if (!mapId || !location) return next('Invalid input');
 
     const msg = `load_uv_plan ${mapId} ${location} path_location\r\n`;
+    console.log(msg)
     return once(msg, 'data', function (re) {
-      console.log(re.toString('utf8'))
+      console.log('return', re.toString('utf8'))
       return res.send({ status: 'OK', data: { loaded: true } });
     });
   },

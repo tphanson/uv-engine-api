@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 /**
- * Middlewares & Graphs
+ * Middlewares & Controllers
  */
 const {
-  bot,
+  bot,map,
 } = require('../controllers');
 
 /**
@@ -16,8 +16,14 @@ const {
  * @method DELETE: delete data
  */
 
-// User
+// Bot
 router.get('/bot', bot.getBotInfo);
+
+// Map
+router.get('/map', map.getMap);
+router.post('/map', map.newMap);
+router.put('/map', map.updateMap);
+router.delete('/map', map.deleteMap);
 
 /**
  * Module exports

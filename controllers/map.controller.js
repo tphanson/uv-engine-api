@@ -8,8 +8,8 @@ module.exports = {
    * @param {*} next
    */
   getMap: function (req, res, next) {
-    const { _id, location } = req.query;
-    if (!_id || !location) return next('Invalid input');
+    const { mapId, location } = req.query;
+    if (!mapId || !location) return next('Invalid input');
 
     return res.send({ status: 'OK', data: {} });
   },
@@ -22,8 +22,8 @@ module.exports = {
    * @param {*} next
    */
   newMap: function (req, res, next) {
-    const { _id, location, data } = req.body;
-    if (!_id || !location || !data) return next('Invalid input');
+    const { mapId, location, data } = req.body;
+    if (!mapId || !location || !data) return next('Invalid input');
 
     return res.send({ status: 'OK', data: {} });
   },
@@ -36,8 +36,8 @@ module.exports = {
    * @param {*} next
    */
   updateMap: function (req, res, next) {
-    const { _id, location, data } = req.body;
-    if (!_id || !location || !data) return next('Invalid input');
+    const { mapId, location, data } = req.body;
+    if (!mapId || !location || !data) return next('Invalid input');
 
     return res.send({ status: 'OK', data: {} });
   },
@@ -50,8 +50,8 @@ module.exports = {
    * @param {*} next
    */
   deleteMap: function (req, res, next) {
-    const { _id, location } = req.body;
-    if (!_id || !location) return next('Invalid input');
+    const { mapId, location } = req.body;
+    if (!mapId || !location) return next('Invalid input');
 
     return res.send({ status: 'OK', data: {} });
   },

@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const net = require('net');
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -16,6 +17,17 @@ console.log('*** Environment:', env);
  */
 const configs = require('./configs');
 global.configs = configs;
+
+/**
+ * Botshell
+ */
+const BOTSHELL_PATH = '/data/data/com.ohmnilabs.telebot_rtc/files/bot_shell.sock';
+const socket = net.createConnection({ path: BOTSHELL_PATH }, function () {
+  console.log("Connected to the bot shell socket");
+});
+socket.on('connect', function () {
+  global.botshell = socket;
+});
 
 /**
  * Creating express server

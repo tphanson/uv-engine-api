@@ -6,7 +6,7 @@ module.exports = {
    * Botshell client
    */
   initBotshell: function (callback) {
-    const BOTSHELL_PATH = '/data/data/com.ohmnilabs.telebot_rtc/files/bot_shell.sock';
+    const BOTSHELL_PATH = '/app/bot_shell.sock';
     const socket = net.createConnection({ path: BOTSHELL_PATH }, function () {
       console.log('*** Connected to the bot shell socket');
     });

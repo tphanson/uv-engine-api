@@ -13,9 +13,17 @@ module.exports = {
     const { mapId, location } = req.query;
     if (!mapId || !location) return next('Invalid input');
 
-    botshell.write(`cmd_load_uv_plan ${mapId} ${location} path_location\n`);
-    return botshell.on('plan_loaded', function () {
-      return res.send({ status: 'OK', data: { loaded: true } });
+    const BOTSHELL_PATH = '/data/data/com.ohmnilabs.telebot_rtc/files/bot_shell.sock';
+    const socket = net.createConnection({ path: BOTSHELL_PATH }, function () {
+      console.log('*** Connected to the bot shell socket');
+    });
+    socket.on('connect', function () {
+      console.log('*** Botshell connected');
+
+      socket.write(`cmd_load_uv_plan ${mapId} ${location} path_location\n`);
+      return socket.on('plan_loaded', function () {
+        return res.send({ status: 'OK', data: { loaded: true } });
+      });
     });
   },
 

@@ -10,7 +10,7 @@ module.exports = {
    * @param {*} next
    */
   getMap: function (req, res, next) {
-    const { mapId, location } = req.query || require('/app/map.json');
+    const { mapId, location } = req.query;
     if (!mapId || !location) return next('Invalid input');
 
     const msg = `load_uv_plan ${encodeURI(mapId)} ${encodeURI(location)} path_location\r\n`;
@@ -18,6 +18,18 @@ module.exports = {
       const loaded = Boolean(parseInt(re.toString()));
       return res.send({ status: 'OK', data: { mapId, location, loaded } });
     });
+  },
+
+  /**
+   * Get current map
+   * @function getCurrentMap
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   */
+  getCurrentMap: function (req, res, next) {
+    const { mapId, location } = require('/app/map.json') || {};
+    return res.send({ status: 'OK', data: { mapId, location } });
   },
 
   /**

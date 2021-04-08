@@ -5,7 +5,7 @@ const router = express.Router();
  * Middlewares & Controllers
  */
 const {
-  bot,map,
+  bot, map,
 } = require('../controllers');
 
 /**
@@ -21,6 +21,7 @@ router.get('/bot', bot.getBotInfo);
 
 // Map
 router.get('/map', map.getMap);
+router.get('/map/current', map.getCurrentMap);
 router.post('/map', map.newMap);
 router.put('/map', map.updateMap);
 router.delete('/map', map.deleteMap);

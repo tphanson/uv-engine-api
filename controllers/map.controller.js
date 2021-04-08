@@ -14,8 +14,7 @@ module.exports = {
     if (!mapId || !location) return next('Invalid input');
 
     return init(function (botshell) {
-      botshell.write('rest_head\r\n');
-      // botshell.write(`cmd_load_uv_plan ${mapId} ${location} path_location`);
+      botshell.write(`cmd_load_uv_plan ${mapId} ${location} path_location\r\n`);
       return botshell.on('plan_loaded', function (re) {
         console.log(re)
         return res.send({ status: 'OK', data: { loaded: true } });

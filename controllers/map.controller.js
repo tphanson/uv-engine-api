@@ -14,7 +14,7 @@ module.exports = {
     if (!mapId || !location) return next('Invalid input');
 
     return initBotshell(function (botshell) {
-      botshell.write('rest_head\n');
+      botshell.write('wake_head\n');
       botshell.end();
       // botshell.write(`cmd_load_uv_plan ${mapId} ${location} path_location`);
       return botshell.on('plan_loaded', function (re) {

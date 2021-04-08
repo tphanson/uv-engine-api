@@ -1,5 +1,4 @@
-const botshell = global.botshell;
-// const net = require('net');
+const { initBotshell } = require('../helpers/botshell');
 
 module.exports = {
 
@@ -14,19 +13,13 @@ module.exports = {
     const { mapId, location } = req.query;
     if (!mapId || !location) return next('Invalid input');
 
-    // const BOTSHELL_PATH = '/data/data/com.ohmnilabs.telebot_rtc/files/bot_shell.sock';
-    // const socket = net.createConnection({ path: BOTSHELL_PATH }, function () {
-    //   console.log('*** Connected to the bot shell socket');
-    // });
-    // socket.on('connect', function () {
-    //   console.log('*** Botshell connected');
-
-    console.log(global)
-    botshell.write(`cmd_load_uv_plan ${mapId} ${location} path_location`);
-    return botshell.on('plan_loaded', function () {
-      return res.send({ status: 'OK', data: { loaded: true } });
+    return initBotshell(function (botshell) {
+      botshell.write(`cmd_load_uv_plan ${mapId} ${location} path_location`);
+      return botshell.on('plan_loaded', function (re) {
+        console.log(re)
+        return res.send({ status: 'OK', data: { loaded: true } });
+      });
     });
-    // });
   },
 
   /**

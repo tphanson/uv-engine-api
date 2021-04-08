@@ -1,3 +1,4 @@
+const fs = require('fs');
 const { once } = require('../helpers/botshell');
 
 module.exports = {
@@ -28,7 +29,8 @@ module.exports = {
    * @param {*} next
    */
   getCurrentMap: function (req, res, next) {
-    const { mapId, location } = require('/app/map.json') || {};
+    const data = fs.readFileSync('/app/map.json');
+    const { mapId, location } = JSON.parse(data) || {};
     return res.send({ status: 'OK', data: { mapId, location } });
   },
 

@@ -1,4 +1,4 @@
-const { init } = require('../helpers/botshell');
+const { once } = require('../helpers/botshell');
 
 module.exports = {
 
@@ -13,12 +13,10 @@ module.exports = {
     const { mapId, location } = req.query;
     if (!mapId || !location) return next('Invalid input');
 
-    return init(function (botshell) {
-      botshell.write(`load_uv_plan ${mapId} ${location} path_location\r\n`);
-      return botshell.on('data', function (re) {
-        console.log(re.toString('utf8'))
-        return res.send({ status: 'OK', data: { loaded: true } });
-      });
+    const msg = `load_uv_plan ${mapId} ${location} path_location\r\n`;
+    return once(msg, 'data', function (re) {
+      console.log(re.toString('utf8'))
+      return res.send({ status: 'OK', data: { loaded: true } });
     });
   },
 

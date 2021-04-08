@@ -1,4 +1,4 @@
-const { initBotshell } = require('../helpers/botshell');
+const { init } = require('../helpers/botshell');
 
 module.exports = {
 
@@ -13,7 +13,7 @@ module.exports = {
     const { mapId, location } = req.query;
     if (!mapId || !location) return next('Invalid input');
 
-    return initBotshell(function (botshell) {
+    return init(function (botshell) {
       botshell.write('wake_head\n');
       botshell.end();
       // botshell.write(`cmd_load_uv_plan ${mapId} ${location} path_location`);

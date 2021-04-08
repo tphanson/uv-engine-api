@@ -10,6 +10,7 @@ module.exports = {
    * @param {*} next
    */
   getBotInfo: function (req, res, next) {
-    return res.send({ status: 'OK', data: {} });
+    const botId = 'f7ad273221de50bcb69ce4b84ba368e19e690aacec6fd358dfb420600e21f913';
+    return res.send({ status: 'OK', data: { botId } });
   }
 }

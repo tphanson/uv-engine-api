@@ -25,6 +25,9 @@ router.post('/map', map.newMap);
 router.put('/map', map.updateMap);
 router.delete('/map', map.deleteMap);
 
+// --env BOT_ID
+// -v /data/data/com.ohmnilabs.telebot_rtc/files:/app
+
 /**
  * Module exports
  */

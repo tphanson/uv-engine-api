@@ -16,7 +16,12 @@ file.readJsonFile = function (dir) {
 }
 
 file.writeJsonFile = function (json, dir) {
-
+  try {
+    const data = JSON.stringify(json);
+    fs.writeFileSync(dir, data);
+  } catch (er) {
+    return null;
+  }
 }
 
 /**

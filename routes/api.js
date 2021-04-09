@@ -5,7 +5,7 @@ const router = express.Router();
  * Middlewares & Controllers
  */
 const {
-  bot, map,
+  bot, map, path,
 } = require('../controllers');
 
 /**
@@ -26,8 +26,12 @@ router.post('/map', map.newMap);
 router.put('/map', map.updateMap);
 router.delete('/map', map.deleteMap);
 
-// --env BOT_ID
-// -v /data/data/com.ohmnilabs.telebot_rtc/files:/app
+// Path
+router.get('/path', path.getPath);
+router.get('/path/current', path.getCurrentPath);
+router.post('/path', path.newPath);
+router.put('/path', path.updatePath);
+router.delete('/path', path.deletePath);
 
 /**
  * Module exports

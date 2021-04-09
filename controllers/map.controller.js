@@ -17,7 +17,9 @@ module.exports = {
     const msg = `load_uv_plan ${encodeURI(mapId)} ${encodeURI(location)} path_location\r\n`;
     return once(msg, 'data', function (re) {
       const loaded = Boolean(parseInt(re.toString()));
-      return res.send({ status: 'OK', data: { mapId, location, loaded } });
+      const path = loaded ? JSON.parse(fs.readFileSync('/app/ohmni_path.json')) : null;
+      const data = { mapId, location, path, loaded }
+      return res.send({ status: 'OK', data });
     });
   },
 
@@ -29,9 +31,11 @@ module.exports = {
    * @param {*} next
    */
   getCurrentMap: function (req, res, next) {
-    const data = fs.readFileSync('/app/map.json');
-    const { mapId, location } = JSON.parse(data) || {};
-    return res.send({ status: 'OK', data: { mapId, location } });
+    const map = fs.readFileSync('/app/map.json');
+    const { mapId, location } = JSON.parse(map) || {};
+    const path = JSON.parse(fs.readFileSync('/app/ohmni_path.json'));
+    const data = { mapId, location, path, loaded: true }
+    return res.send({ status: 'OK', data });
   },
 
   /**

@@ -15,18 +15,28 @@ file.readJsonFile = function (dir) {
   }
 }
 
+file.writeJsonFile = function (json, dir) {
+
+}
+
 /**
- * Read map file
+ * Read/Write map file
  */
 file.readMap = function () {
   return file.readJsonFile(MAP);
 }
+file.writeMap = function (json) {
+  return file.writeJsonFile(json, MAP);
+}
 
 /**
- * Read path file
+ * Read/Write path file
  */
 file.readPath = function () {
   return file.readJsonFile(PATH);
+}
+file.writePath = function (json) {
+  return file.writeJsonFile(json, PATH);
 }
 
 module.exports = file;

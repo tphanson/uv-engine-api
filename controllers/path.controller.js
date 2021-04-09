@@ -1,4 +1,4 @@
-const { readPath } = require('../helpers/file');
+const { readMap, readPath, writePath } = require('../helpers/file');
 
 module.exports = {
 
@@ -56,7 +56,8 @@ module.exports = {
     const { mapId, path } = req.body;
     if (!mapId || !path) return next('Invalid input');
 
-    return res.send({ status: 'OK', data: {} });
+    const ok = writePath(path);
+    return res.send({ status: 'OK', data: { ok } });
   },
 
   /**

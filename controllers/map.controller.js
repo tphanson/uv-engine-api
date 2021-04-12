@@ -33,7 +33,7 @@ module.exports = {
   getCurrentMap: function (req, res, next) {
     const { mapId, location } = readMap() || {};
     const path = readPath();
-    const data = { mapId, location, path, loaded: true }
+    const data = { mapId, location, path, loaded: Boolean(mapId) }
     return res.send({ status: 'OK', data });
   },
 

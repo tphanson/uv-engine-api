@@ -22,16 +22,16 @@ router.get('/bot', bot.getBotInfo);
 // Map
 router.get('/map', map.getMap);
 router.get('/map/current', map.getCurrentMap);
-router.post('/map', map.newMap);
-router.put('/map', map.updateMap);
-router.delete('/map', map.deleteMap);
+// router.post('/map', map.newMap);
+// router.put('/map', map.updateMap);
+// router.delete('/map', map.deleteMap);
 
 // Path
-router.get('/path', path.getPath);
+// router.get('/path', path.getPath);
 router.get('/path/current', path.getCurrentPath);
-router.post('/path', path.newPath);
+// router.post('/path', path.newPath);
 router.put('/path', path.updatePath);
-router.delete('/path', path.deletePath);
+// router.delete('/path', path.deletePath);
 
 /**
  * Module exports

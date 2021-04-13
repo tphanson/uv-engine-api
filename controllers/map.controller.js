@@ -16,6 +16,7 @@ module.exports = {
 
     const msg = `load_uv_plan ${encodeURI(mapId)} ${encodeURI(location)} ${encodeURI(pathId)}\r\n`;
     return once(msg, 'data', function (re) {
+      if (!re) return res.next('ROS has no response');
       const loaded = Boolean(parseInt(re.toString()));
       const path = loaded ? readPath() : null;
       const data = { mapId, location, path, loaded }

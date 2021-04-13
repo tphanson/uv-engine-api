@@ -11,12 +11,12 @@ module.exports = {
    * @param {*} next
    */
   getMap: function (req, res, next) {
-    const { mapId, location } = req.query;
-    if (!mapId || !location) return next('Invalid input');
+    const { mapId, location, pathId } = req.query;
+    if (!mapId || !location || !pathId) return next('Invalid input');
 
-    const msg = `load_uv_plan ${encodeURI(mapId)} ${encodeURI(location)} path_location\r\n`;
+    const msg = `load_uv_plan ${encodeURI(mapId)} ${encodeURI(location)} ${encodeURI(pathId)}\r\n`;
+    console.log(msg)
     return once(msg, 'data', function (re) {
-      console.log(re.toString())
       const loaded = Boolean(parseInt(re.toString()));
       const path = loaded ? readPath() : null;
       const data = { mapId, location, path, loaded }

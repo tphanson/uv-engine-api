@@ -58,7 +58,7 @@ module.exports = {
     if (!mapId || !path) return next('Invalid input');
 
     let ok = writePath(path);
-    const msg = 'save_uv_plan';
+    const msg = 'save_uv_path';
     return once(msg, 'data', function (re) {
       if (!re) return next('ROS has no response');
       ok = ok && Boolean(parseInt(re.toString()));

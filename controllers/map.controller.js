@@ -16,6 +16,7 @@ module.exports = {
 
     const msg = `load_uv_plan ${encodeURI(mapId)} ${encodeURI(location)} path_location\r\n`;
     return once(msg, 'data', function (re) {
+      console.log(re)
       const loaded = Boolean(parseInt(re.toString()));
       const path = loaded ? readPath() : null;
       const data = { mapId, location, path, loaded }

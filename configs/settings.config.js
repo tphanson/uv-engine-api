@@ -1,9 +1,7 @@
 /**
  * Contructor
  */
-var configs = {};
-
-console.log(process.env)
+const configs = {};
 
 /**
  * Development configurations
@@ -17,7 +15,7 @@ configs.development = {
  * Staging configurations
  */
 configs.staging = {
-  botId: '',
+  botId: process.env.BOT_ID,
   port: 80,
 };
 
@@ -25,7 +23,7 @@ configs.staging = {
  * Production configurations
  */
 configs.production = {
-  botId: '',
+  botId: process.env.BOT_ID,
   port: 80,
 };
 

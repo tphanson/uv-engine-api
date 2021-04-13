@@ -3,6 +3,8 @@
  */
 var configs = {};
 
+console.log(process.env)
+
 /**
  * Development configurations
  */

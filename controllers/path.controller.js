@@ -1,4 +1,5 @@
 const { readMap, readPath, writePath } = require('../helpers/file');
+const { once } = require('../helpers/botshell');
 
 module.exports = {
 
@@ -56,8 +57,13 @@ module.exports = {
     const { mapId, path } = req.body;
     if (!mapId || !path) return next('Invalid input');
 
-    const ok = writePath(path);
-    return res.send({ status: 'OK', data: { ok } });
+    let ok = writePath(path);
+    const msg = 'save_uv_plan';
+    return once(msg, 'data', function (re) {
+      if (!re) return next('ROS has no response');
+      ok = ok && Boolean(parseInt(re.toString()));
+      return res.send({ status: 'OK', data: { ok } });
+    });
   },
 
   /**

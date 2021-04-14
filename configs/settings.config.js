@@ -2,6 +2,7 @@
  * Contructor
  */
 const configs = {};
+const { env: { BOT_ID, WAPP_API_PORT } } = process;
 
 /**
  * Development configurations
@@ -15,16 +16,16 @@ configs.development = {
  * Staging configurations
  */
 configs.staging = {
-  botId: process.env.BOT_ID,
-  port: 3001,
+  botId: BOT_ID,
+  port: WAPP_API_PORT,
 };
 
 /**
  * Production configurations
  */
 configs.production = {
-  botId: process.env.BOT_ID,
-  port: 3001,
+  botId: BOT_ID,
+  port: WAPP_API_PORT,
 };
 
 /**

@@ -14,7 +14,7 @@ module.exports = {
     const { mapId, location, pathId } = req.query;
     if (!mapId || !location || !pathId) return next('Invalid input');
 
-    const msg = `load_uv_plan ${encodeURI(mapId)} ${encodeURI(location)} ${encodeURI(pathId)}\r\n`;
+    const msg = `load_uv_plan ${encodeURI(mapId)} ${encodeURI(location)} ${encodeURI(pathId)}`;
     return once(msg, 'data', function (re) {
       if (!re) return next('ROS has no response');
       const loaded = Boolean(parseInt(re.toString()));

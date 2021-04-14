@@ -23,6 +23,7 @@ botshell.init = function (callback) {
 botshell.once = function (msg, event, callback) {
   return botshell.init(function (socket) {
     let response = null;
+    msg = msg + '\r\n';
     socket.write(msg, function () {
       return socket.on(event, function (re) {
         if (re.toString() == 'Connected to ohmni bot_shell.\n') return;

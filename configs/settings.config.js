@@ -16,7 +16,7 @@ configs.development = {
  */
 configs.staging = {
   botId: process.env.BOT_ID,
-  port: 80,
+  port: 3001,
 };
 
 /**
@@ -24,7 +24,7 @@ configs.staging = {
  */
 configs.production = {
   botId: process.env.BOT_ID,
-  port: 80,
+  port: 3001,
 };
 
 /**

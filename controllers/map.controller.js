@@ -1,5 +1,6 @@
 const { readMap, readPath } = require('../helpers/file');
 const { once } = require('../helpers/botshell');
+const { parseInfo } = require('../helpers/utils');
 
 module.exports = {
 
@@ -18,8 +19,10 @@ module.exports = {
     return once(msg, 'data', function (re) {
       if (!re) return next('ROS has no response');
       const loaded = Boolean(parseInt(re.toString()));
-      const path = loaded ? readPath() : null;
-      const data = { mapId, location, path, loaded }
+      if (!loaded) return next('Load map failed');
+      const { map, info } = readMap() || {};
+      const path = readPath();
+      const data = { mapId, location, path, map, info: parseInfo(info) }
       return res.send({ status: 'OK', data });
     });
   },
@@ -32,9 +35,11 @@ module.exports = {
    * @param {*} next
    */
   getCurrentMap: function (req, res, next) {
-    const { mapId, location } = readMap() || {};
+    const { mapId, location, map, info } = readMap() || {};
+    const loaded = Boolean(mapId);
+    if (!loaded) return next('Load map failed');
     const path = readPath();
-    const data = { mapId, location, path, loaded: Boolean(mapId) }
+    const data = { mapId, location, path, map, info: parseInfo(info) }
     return res.send({ status: 'OK', data });
   },
 

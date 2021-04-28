@@ -1,9 +1,16 @@
+const configs = global.configs;
 const fs = require('fs');
 
-const MAP = '/app/map.json';
-const PATH = '/app/ohmni_path.json'
-
 const file = {}
+
+file.readTxtFile = function (dir) {
+  try {
+    const raw = fs.readFileSync(dir, 'utf8');
+    return raw;
+  } catch (er) {
+    return null;
+  }
+}
 
 file.readJsonFile = function (dir) {
   try {
@@ -28,20 +35,28 @@ file.writeJsonFile = function (json, dir) {
  * Read/Write map file
  */
 file.readMap = function () {
-  return file.readJsonFile(MAP);
+  const { files: { map, image, info } } = configs;
+  return {
+    ...file.readJsonFile(map),
+    map: file.readTxtFile(image),
+    info: file.readTxtFile(info)
+  }
 }
 file.writeMap = function (json) {
-  return file.writeJsonFile(json, MAP);
+  const { files: { map, image } } = configs;
+  return file.writeJsonFile(json, map);
 }
 
 /**
  * Read/Write path file
  */
 file.readPath = function () {
-  return file.readJsonFile(PATH);
+  const { files: { path } } = configs;
+  return file.readJsonFile(path);
 }
 file.writePath = function (json) {
-  return file.writeJsonFile(json, PATH);
+  const { files: { path } } = configs;
+  return file.writeJsonFile(json, path);
 }
 
 module.exports = file;

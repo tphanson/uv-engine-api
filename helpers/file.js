@@ -5,7 +5,7 @@ const file = {}
 
 file.readTxtFile = function (dir) {
   try {
-    const raw = fs.readFileSync(dir, 'utf8');
+    const raw = fs.readFileSync(dir, 'binary');
     return raw;
   } catch (er) {
     return null;

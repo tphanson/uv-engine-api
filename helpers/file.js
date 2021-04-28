@@ -43,7 +43,7 @@ file.readMap = function () {
   }
 }
 file.writeMap = function (json) {
-  const { files: { map, image } } = configs;
+  const { files: { map } } = configs;
   return file.writeJsonFile(json, map);
 }
 
